@@ -1,0 +1,36 @@
+{
+  "name": "time-logger",
+  "version": "1.0.0",
+  "description": "Track gym, study, and work sessions with consistency analytics",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm start",
+    "start": "cd server && node index.js",
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install",
+    "build": "cd client && npm run build",
+    "postinstall": "npm run install-all"
+  },
+  "keywords": [
+    "time-tracker",
+    "attendance",
+    "productivity",
+    "analytics",
+    "react",
+    "nodejs"
+  ],
+  "author": "Alex Maldonado",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/time-logger.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/time-logger/issues"
+  },
+  "homepage": "https://github.com/yourusername/time-logger#readme"
+}
