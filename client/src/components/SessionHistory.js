@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { format, parseISO } from 'date-fns';
-import axios from 'axios';
 
 const SessionHistory = ({ sessions, activities, onDeleteSession }) => {
   const [filter, setFilter] = useState('all');

@@ -1,16 +1,19 @@
 {
-  "name": "time-logger",
+  "name": "personal-efficiency-dashboard",
   "version": "1.0.0",
-  "description": "Track gym, study, and work sessions with consistency analytics",
+  "description": "Personal Efficiency Dashboard — track gym, study, and work sessions with analytics",
   "main": "server/index.js",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd server && npm run dev",
     "client": "cd client && npm start",
-    "start": "cd server && node index.js",
-    "install-all": "npm install && cd server && npm install && cd ../client && npm install",
+    "start": "cd server && NODE_ENV=production node index.js",
+    "install-all": "npm install --ignore-scripts && cd server && npm install && cd ../client && npm install",
     "build": "cd client && npm run build",
-    "postinstall": "npm run install-all"
+    "lint": "npm run lint --prefix client && npm run lint --prefix server",
+    "test": "npm run test --prefix server && npm run test --prefix client -- --watchAll=false --ci",
+    "test:client": "cd client && CI=true npm test -- --watchAll=false",
+    "test:server": "cd server && npm test"
   },
   "keywords": [
     "time-tracker",
@@ -18,7 +21,8 @@
     "productivity",
     "analytics",
     "react",
-    "nodejs"
+    "nodejs",
+    "personal-efficiency-dashboard"
   ],
   "author": "Alex Maldonado",
   "license": "MIT",
@@ -27,10 +31,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/time-logger.git"
+    "url": "git+https://github.com/alexrmal/time-logger.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/time-logger/issues"
+    "url": "https://github.com/alexrmal/time-logger/issues"
   },
-  "homepage": "https://github.com/yourusername/time-logger#readme"
+  "homepage": "https://github.com/alexrmal/time-logger#readme"
 }

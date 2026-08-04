@@ -146,7 +146,7 @@ function App() {
   return (
     <div className="container">
       <header className="text-center mb-4">
-        <h1 className="mb-2">⏰ Time Logger</h1>
+        <h1 className="mb-2">Personal Efficiency Dashboard</h1>
         <p className="text-muted">Track your gym, study, and work sessions</p>
       </header>
 

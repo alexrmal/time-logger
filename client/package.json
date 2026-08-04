@@ -1,5 +1,5 @@
 {
-  "name": "time-logger-client",
+  "name": "personal-efficiency-dashboard-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,10 +15,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node ./node_modules/react-scripts/bin/react-scripts.js start",
+    "build": "node ./node_modules/react-scripts/bin/react-scripts.js build",
+    "test": "node ./node_modules/react-scripts/bin/react-scripts.js test",
+    "lint": "node ./node_modules/eslint/bin/eslint.js \"src/**/*.{js,jsx}\" --max-warnings 0",
+    "eject": "node ./node_modules/react-scripts/bin/react-scripts.js eject"
   },
   "eslintConfig": {
     "extends": [
@@ -38,5 +39,10 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001",
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)/"
+    ]
+  }
 }

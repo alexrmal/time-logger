@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
-import { format, subDays, startOfDay } from 'date-fns';
+import { format } from 'date-fns';
 import axios from 'axios';
 
 const Analytics = ({ activities }) => {
@@ -9,18 +9,14 @@ const Analytics = ({ activities }) => {
   const [selectedActivity, setSelectedActivity] = useState('all');
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadAnalytics();
-  }, [period, selectedActivity]);
-
-  const loadAnalytics = async () => {
+  const loadAnalytics = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams({ period });
       if (selectedActivity !== 'all') {
         params.append('activity_type', selectedActivity);
       }
-      
+
       const response = await axios.get(`/api/analytics?${params}`);
       setAnalytics(response.data);
     } catch (err) {
@@ -28,18 +24,17 @@ const Analytics = ({ activities }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [period, selectedActivity]);
+
+  useEffect(() => {
+    loadAnalytics();
+  }, [loadAnalytics]);
 
   const formatDuration = (minutes) => {
     if (!minutes) return '0m';
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
     return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
-  };
-
-  const getActivityColor = (activityName) => {
-    const activity = activities.find(a => a.name === activityName);
-    return activity ? activity.color : '#667eea';
   };
 
   const getActivityIcon = (activityName) => {
@@ -105,8 +100,9 @@ const Analytics = ({ activities }) => {
       <div className="card mb-4">
         <div className="grid grid-3">
           <div className="form-group">
-            <label className="form-label">Time Period</label>
-            <select 
+            <label className="form-label" htmlFor="analytics-period">Time Period</label>
+            <select
+              id="analytics-period"
               className="form-control"
               value={period}
               onChange={(e) => setPeriod(e.target.value)}
@@ -118,8 +114,9 @@ const Analytics = ({ activities }) => {
           </div>
           
           <div className="form-group">
-            <label className="form-label">Activity Filter</label>
-            <select 
+            <label className="form-label" htmlFor="analytics-activity">Activity Filter</label>
+            <select
+              id="analytics-activity"
               className="form-control"
               value={selectedActivity}
               onChange={(e) => setSelectedActivity(e.target.value)}

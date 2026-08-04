@@ -1,0 +1,10 @@
+node_modules
+**/node_modules
+client/build
+.git
+.github
+coverage
+*.md
+.env*
+server/data.json
+npm-debug.log*
